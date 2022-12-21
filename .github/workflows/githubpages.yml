@@ -1,0 +1,25 @@
+name: Deploy to GitHub Pages
+
+# Run workflow on every push to the master branch
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  publish:
+    name: build and publish to Github Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v3.x
+      # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
+      - name: Add .nojekyll file
+        run: touch wwwroot/.nojekyll
+
+      - name: Commit wwwroot to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: wwwroot
