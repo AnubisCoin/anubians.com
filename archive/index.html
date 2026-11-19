@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Browse all 10,000 Anubians — traits, rarity, token strings and images from the Hathor Network." />
+    <meta name="author" content="AnubisCoin" />
+    <title>The Anubian Archive — 10,000 Anubians on Hathor</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Varela+Round&display=swap" rel="stylesheet" />
+    <link href="/archive/archive.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="site-nav" id="siteNav">
+        <div class="nav-wrap">
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="/">Home</a>
+                <a href="/archive/" class="is-active" aria-current="page">Archive</a>
+                <a href="/#buy">Buy</a>
+                <a href="/#projects">Project</a>
+                <a href="/#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-inner">
+                <p class="eyebrow">Inscribed on the Hathor Network</p>
+                <h1>Anubian Archive</h1>
+                <p class="hero-sub">Every one of the 10,000 Anubians — its image, its traits, its rarity and the token string that binds it to the chain.</p>
+                <a class="btn" href="#browser">Browse the Archive</a>
+                <dl class="stats" aria-label="Collection statistics">
+                    <div><dt>Anubians</dt><dd id="stat-total">—</dd></div>
+                    <div><dt>Trait types</dt><dd id="stat-types">—</dd></div>
+                    <div><dt>Trait values</dt><dd id="stat-values">—</dd></div>
+                    <div><dt>Rarest</dt><dd id="stat-rarest">—</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <section class="browser" id="browser" aria-label="Archive browser">
+            <aside class="filters" id="filters-panel">
+                <div class="filters-head">
+                    <h2>Traits</h2>
+                    <button type="button" class="reset" id="reset-filters">Reset</button>
+                </div>
+                <div id="filter-list" class="filter-list">
+                    <p class="loading-note">Loading traits…</p>
+                </div>
+            </aside>
+
+            <div class="results">
+                <div class="toolbar">
+                    <label class="search">
+                        <span class="search-icon" aria-hidden="true">⌕</span>
+                        <input type="search" id="search" placeholder="Search #1234, A1234 or Osiris" autocomplete="off" aria-label="Search Anubians" />
+                    </label>
+                    <div class="select-wrap">
+                        <label for="sort">Sort</label>
+                        <select id="sort">
+                            <option value="id-asc">Number ↑</option>
+                            <option value="id-desc">Number ↓</option>
+                            <option value="rank-asc">Rarest first</option>
+                            <option value="rank-desc">Most common first</option>
+                        </select>
+                    </div>
+                    <div class="select-wrap">
+                        <label for="page-size">Per page</label>
+                        <select id="page-size">
+                            <option value="24">24</option>
+                            <option value="48" selected>48</option>
+                            <option value="96">96</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="active-filters" id="active-filters" hidden></div>
+                <p class="result-count" id="result-count">Summoning the archive…</p>
+
+                <div class="grid" id="grid" aria-live="polite"></div>
+                <nav class="pager" id="pager" aria-label="Pagination"></nav>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Anubians — the blockchain gods have arrived.</p>
+        <p class="fine">Images and traits read from the Hathor Network. Archive generated <span id="generated-at">—</span>.</p>
+    </footer>
+
+    <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-card" role="document">
+            <button type="button" class="modal-close" data-close aria-label="Close">×</button>
+            <div class="modal-media">
+                <img id="modal-image" src="" alt="" width="590" height="590" />
+                <span class="modal-rank" id="modal-rank"></span>
+            </div>
+            <div class="modal-info">
+                <p class="eyebrow" id="modal-of"></p>
+                <h2 id="modal-title">Anubian</h2>
+                <p class="modal-sub"><span id="modal-symbol"></span> <span class="dot">·</span> <span id="modal-rarity"></span></p>
+
+                <h3>Attributes</h3>
+                <ul class="attrs" id="modal-attrs"></ul>
+
+                <h3>Token string</h3>
+                <div class="token-row">
+                    <code id="modal-token"></code>
+                    <button type="button" class="copy" id="copy-token">Copy</button>
+                </div>
+
+                <div class="modal-links">
+                    <a id="link-hathor" href="#" target="_blank" rel="noopener">Hathor Explorer ↗</a>
+                    <a id="link-nileswap" href="#" target="_blank" rel="noopener">Nileswap ↗</a>
+                </div>
+
+                <nav class="modal-nav" aria-label="Browse Anubians">
+                    <button type="button" id="modal-prev">← Previous</button>
+                    <button type="button" id="modal-next">Next →</button>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <noscript>
+        <p class="noscript">The archive browser needs JavaScript. You can still open <a href="/archive/data.json">data.json</a> directly.</p>
+    </noscript>
+    <script src="/archive/archive.js"></script>
+</body>
+</html>
